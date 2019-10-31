@@ -1,8 +1,9 @@
 {
-    "name": "film-nerd",
+    "name": "frontend",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@babel/preset-react": "^7.6.3",
         "@types/jest": "24.0.21",
         "@types/node": "12.12.3",
         "@types/react": "16.9.11",
@@ -22,7 +23,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "jest",
         "codegen": "graphql-codegen --config codegen.yml",
         "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
     },
@@ -40,6 +41,11 @@
     "eslintConfig": {
         "extends": "react-app"
     },
+    "jest": {
+        "moduleNameMapper": {
+            "\\.(css|jpg|png|svg)$": "<rootDir>/empty-module.js"
+        }
+    },
     "browserslist": {
         "production": [
             ">0.2%",
@@ -53,12 +59,16 @@
         ]
     },
     "devDependencies": {
+        "@babel/core": "^7.6.4",
+        "@babel/preset-env": "^7.6.3",
+        "@babel/preset-typescript": "^7.6.0",
         "@graphql-codegen/cli": "^1.8.2",
         "@graphql-codegen/typescript": "1.8.2",
         "@graphql-codegen/typescript-operations": "1.8.2",
         "@graphql-codegen/typescript-react-apollo": "1.8.2",
         "@typescript-eslint/eslint-plugin": "^2.6.0",
         "@typescript-eslint/parser": "^2.6.0",
+        "babel-jest": "^24.9.0",
         "eslint": "^6.6.0",
         "eslint-config-prettier": "^6.5.0",
         "eslint-plugin-prettier": "^3.1.1",
