@@ -1,1 +1,1 @@
-## The first film recommendation app that makes sence ;)
+## The first film recommendation app that makes sense ;)
