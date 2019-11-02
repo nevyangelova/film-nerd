@@ -16,7 +16,11 @@ const resolvers: IResolvers = {
             return fakeMovie();
         },
         movie: async (_source, { title }, { dataSources }) => {
-            return dataSources.moviesAPI.getMovieByTitle('Country');
+            let result = await dataSources.moviesAPI.getMovieByTitle(title);
+
+            result.Actors = result.Actors.split(', ');
+
+            return result;
         },
     },
 };

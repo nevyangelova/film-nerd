@@ -27,4 +27,4 @@ app.use('*', cors_1.default());
 app.use(compression_1.default());
 server.applyMiddleware({ app, path: '/graphql' });
 const httpServer = http_1.createServer(app);
-httpServer.listen({ port: 3000 }, () => console.log(`\n🚀      GraphQL is now running on http://localhost:3000/graphql`));
+httpServer.listen({ port: 4000 }, () => console.log(`\n🚀      GraphQL is now running on http://localhost:4000/graphql`));

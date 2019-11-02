@@ -26,7 +26,7 @@ const resolvers = {
             return fakeMovie();
         },
         movie: (_source, { title }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () {
-            return dataSources.moviesAPI.getMovieByTitle('Country');
+            return dataSources.moviesAPI.getMovieByTitle(title);
         }),
     },
 };

@@ -7,14 +7,12 @@ import cors from 'cors';
 import schema from './schema';
 import { MoviesAPI } from './movies/api';
 import resolvers from './resolverMap';
-import { RedisCache } from 'apollo-server-cache-redis';
 
 const app = express();
 const server = new ApolloServer({
     schema,
     validationRules: [depthLimit(7)],
     resolvers,
-    // cache: new RedisCache(),
     dataSources: () => {
         return {
             moviesAPI: new MoviesAPI(),
@@ -30,6 +28,6 @@ server.applyMiddleware({ app, path: '/graphql' });
 
 const httpServer = createServer(app);
 
-httpServer.listen({ port: 3000 }, (): void =>
-    console.log(`\n🚀      GraphQL is now running on http://localhost:3000/graphql`),
+httpServer.listen({ port: 4000 }, (): void =>
+    console.log(`\n🚀      GraphQL is now running on http://localhost:4000/graphql`),
 );
