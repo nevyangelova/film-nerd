@@ -1,6 +1,7 @@
 type Query {
     helloWorld: String!
     fakeMovie: Movie!
+    movie: Movie!
 }
 
 type Movie {

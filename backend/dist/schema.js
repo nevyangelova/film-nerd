@@ -11,11 +11,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("graphql-import-node");
-var typeDefs = __importStar(require("./schema/schema.graphql"));
-var graphql_tools_1 = require("graphql-tools");
-var resolverMap_1 = __importDefault(require("./resolverMap"));
-var schema = graphql_tools_1.makeExecutableSchema({
-    typeDefs: typeDefs,
+const typeDefs = __importStar(require("./schema/schema.graphql"));
+const graphql_tools_1 = require("graphql-tools");
+const resolverMap_1 = __importDefault(require("./resolverMap"));
+const schema = graphql_tools_1.makeExecutableSchema({
+    typeDefs,
     resolvers: resolverMap_1.default
 });
 exports.default = schema;

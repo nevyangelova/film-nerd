@@ -8,26 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const en_1 = __importDefault(require("faker/locale/en"));
-const fakeMovie = () => ({
-    Title: en_1.default.name.findName(),
-    Year: en_1.default.date.past().toString(),
-});
-const resolvers = {
-    Query: {
-        helloWorld(_, args) {
-            return `👋 Hello world! 👋`;
-        },
-        fakeMovie(_, args) {
-            return fakeMovie();
-        },
-        movie: (_source, { title }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () {
-            return dataSources.moviesAPI.getMovieByTitle('Country');
-        }),
-    },
-};
-exports.default = resolvers;
+const apollo_datasource_rest_1 = require("apollo-datasource-rest");
+const API_KEY = '362780b3';
+class MoviesAPI extends apollo_datasource_rest_1.RESTDataSource {
+    constructor() {
+        super();
+        this.baseURL = 'http://www.omdbapi.com/';
+    }
+    getMovieByTitle(title) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.get(`?t=${title}&apikey=${API_KEY}`);
+        });
+    }
+}
+exports.MoviesAPI = MoviesAPI;

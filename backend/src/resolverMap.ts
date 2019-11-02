@@ -15,6 +15,9 @@ const resolvers: IResolvers = {
         fakeMovie(_: void, args: void): Movie_Ext {
             return fakeMovie();
         },
+        movie: async (_source, { title }, { dataSources }) => {
+            return dataSources.moviesAPI.getMovieByTitle('Country');
+        },
     },
 };
 
