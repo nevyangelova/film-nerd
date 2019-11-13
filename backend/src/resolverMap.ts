@@ -22,6 +22,7 @@ const resolvers: IResolvers = {
 
             return result;
         },
+        actor: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getActorDetails(birthName),
     },
 };
 

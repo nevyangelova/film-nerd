@@ -1,0 +1,12 @@
+schema: src/schema/schema.graphql
+generates:
+  src/types.generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-resolvers
+    config:
+      maybeValue: T | undefined
+      scalars:
+        DateTime: Date
+        PhoneNumber: string

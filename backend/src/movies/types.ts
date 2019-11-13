@@ -30,3 +30,18 @@ interface Rating {
     Source: string;
     Value: string;
 }
+
+export interface Actor {
+    image?: string;
+    caption?: string;
+    birthName?: string;
+    birthDate?: { date: Date; age: Number };
+    birthPlace?: string;
+    occupation?: string;
+    yearsActive?: string;
+    spouse?: string;
+    children?: string;
+    father?: string;
+    relatives?: string;
+    website?: string;
+}

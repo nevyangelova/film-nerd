@@ -26,8 +26,11 @@ const resolvers = {
             return fakeMovie();
         },
         movie: (_source, { title }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () {
-            return dataSources.moviesAPI.getMovieByTitle(title);
+            let result = yield dataSources.moviesAPI.getMovieByTitle(title);
+            result.Actors = result.Actors.split(', ');
+            return result;
         }),
+        actor: (_source, { birthName }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () { return dataSources.moviesAPI.getActorDetails(birthName); }),
     },
 };
 exports.default = resolvers;
