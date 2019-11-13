@@ -22,7 +22,9 @@ const resolvers: IResolvers = {
 
             return result;
         },
-        actor: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getActorDetails(birthName),
+        actor: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getDetails(birthName),
+        director: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getDetails(birthName),
+        writer: async (_source, { name }, { dataSources }) => dataSources.moviesAPI.getDetails(name),
     },
 };
 
