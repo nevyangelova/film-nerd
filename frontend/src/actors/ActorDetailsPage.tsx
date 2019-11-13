@@ -9,10 +9,6 @@ interface actor {
     birthPlace: string;
 }
 
-interface actorVars {
-    birthName: string;
-}
-
 const ACTOR_DETAILS = gql`
     query ActorQuery($birthName: String!) {
         actor(birthName: $birthName) {
