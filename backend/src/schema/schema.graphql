@@ -1,6 +1,4 @@
 type Query {
-    helloWorld: String!
-    fakeMovie: Movie!
     movies(title: String!): [Movie!]!
     movie(title: String!): Movie
     actor(birthName: String!): Actor

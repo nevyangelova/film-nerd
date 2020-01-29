@@ -9,16 +9,9 @@ const fakeMovie = (): Movie_Ext => ({
 
 const resolvers: IResolvers = {
     Query: {
-        helloWorld(_: void, args: void): string {
-            return `👋 Hello world! 👋`;
-        },
-        fakeMovie(_: void, args: void): Movie_Ext {
-            return fakeMovie();
-        },
         movies: async (_source, { title }, { dataSources }) => {
             let result = await dataSources.moviesAPI.searchMovies(title);
 
-            console.log(result);
             return result.Search || [];
         },
         movie: async (_source, { title }, { dataSources }) => {

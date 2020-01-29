@@ -19,18 +19,18 @@ const fakeMovie = () => ({
 });
 const resolvers = {
     Query: {
-        helloWorld(_, args) {
-            return `👋 Hello world! 👋`;
-        },
-        fakeMovie(_, args) {
-            return fakeMovie();
-        },
+        movies: (_source, { title }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () {
+            let result = yield dataSources.moviesAPI.searchMovies(title);
+            return result.Search || [];
+        }),
         movie: (_source, { title }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () {
             let result = yield dataSources.moviesAPI.getMovieByTitle(title);
             result.Actors = result.Actors.split(', ');
             return result;
         }),
-        actor: (_source, { birthName }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () { return dataSources.moviesAPI.getActorDetails(birthName); }),
+        actor: (_source, { birthName }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () { return dataSources.moviesAPI.getDetails(birthName, 'actor'); }),
+        director: (_source, { name }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () { return dataSources.moviesAPI.getDetails(name, 'director'); }),
+        writer: (_source, { name }, { dataSources }) => __awaiter(void 0, void 0, void 0, function* () { return dataSources.moviesAPI.getDetails(name, 'writer'); }),
     },
 };
 exports.default = resolvers;

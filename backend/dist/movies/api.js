@@ -20,16 +20,24 @@ class MoviesAPI extends apollo_datasource_rest_1.RESTDataSource {
         super();
         this.baseURL = 'http://www.omdbapi.com/';
     }
+    searchMovies(title) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.get(`?s=${title}&apikey=${API_KEY}&page=1`);
+        });
+    }
     getMovieByTitle(title) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.get(`?t=${title}&apikey=${API_KEY}`);
         });
     }
-    getActorDetails(birthName) {
+    getDetails(birthName, type) {
         return __awaiter(this, void 0, void 0, function* () {
-            return wikijs_1.default({ apiUrl: 'https://en.wikipedia.org/w/api.php' })
-                .page(birthName)
-                .then((page) => page.info());
+            let page = yield wikijs_1.default({ apiUrl: 'https://en.wikipedia.org/w/api.php' }).page(birthName);
+            const categories = yield page.categories();
+            if (categories.includes('Category:All disambiguation pages')) {
+                page = yield wikijs_1.default({ apiUrl: 'https://en.wikipedia.org/w/api.php' }).page(`${birthName} (${type})`);
+            }
+            return page.info();
         });
     }
 }
