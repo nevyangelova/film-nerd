@@ -6,7 +6,7 @@ import { ACTOR_DETAILS_PATH, DIRECTOR_DETAILS_PATH, WRITER_DETAILS_PATH } from '
 import { MoviesQuery, MoviesQueryVariables, MoviesQuery_movies } from './types/MoviesQuery';
 import { MovieList } from './MovieList';
 
-const MOVIE = gql`
+const MOVIES = gql`
     query MoviesQuery($title: String!) {
         movies(title: $title) {
             Title
@@ -22,11 +22,11 @@ const MovieSearchPage: React.FC = () => {
         setSearchValue(e.currentTarget.value);
     };
 
-    const { loading, error, data } = useQuery<MoviesQuery, MoviesQueryVariables>(MOVIE, {
+    const { loading, error, data } = useQuery<MoviesQuery, MoviesQueryVariables>(MOVIES, {
         variables: { title: searchValue },
     });
 
-    console.log(data);
+    if (error) return <p>Error :(</p>;
 
     return (
         <div id="movies">
@@ -37,8 +37,6 @@ const MovieSearchPage: React.FC = () => {
         </div>
     );
 
-    // if (loading) return <p>Loading...</p>;
-    // if (error) return <p>Error :(</p>;
     // return (
     //     <div>
     //         {data && (

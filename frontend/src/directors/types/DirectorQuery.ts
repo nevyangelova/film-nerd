@@ -8,7 +8,7 @@
 
 export interface DirectorQuery_director {
   __typename: "Director";
-  birthName: string | null;
+  name: string | null;
 }
 
 export interface DirectorQuery {
@@ -16,5 +16,5 @@ export interface DirectorQuery {
 }
 
 export interface DirectorQueryVariables {
-  birthName: string;
+  name: string;
 }

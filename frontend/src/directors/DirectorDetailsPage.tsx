@@ -5,9 +5,9 @@ import { gql } from 'graphql.macro';
 import { DirectorQuery, DirectorQueryVariables } from './types/DirectorQuery';
 
 const DIRECTOR_DETAILS = gql`
-    query DirectorQuery($birthName: String!) {
-        director(birthName: $birthName) {
-            birthName
+    query DirectorQuery($name: String!) {
+        director(name: $name) {
+            name
         }
     }
 `;
@@ -15,13 +15,13 @@ const DIRECTOR_DETAILS = gql`
 const DirectorDetailsPage: React.FC = props => {
     const director = useParams<any>();
     const { loading, error, data } = useQuery<DirectorQuery, DirectorQueryVariables>(DIRECTOR_DETAILS, {
-        variables: { birthName: director.birthName },
+        variables: { name: director.name },
     });
-    console.log(data);
+    console.log(director);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return <div>{data && data.director ? data.director.birthName : loading}</div>;
+    return <div>{data && data.director ? data.director.name : loading}</div>;
 };
 
 export default DirectorDetailsPage;

@@ -3,19 +3,22 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: MoviesQuery
+// GraphQL query operation: MovieQuery
 // ====================================================
 
-export interface MoviesQuery_movies {
+export interface MovieQuery_movie {
   __typename: "Movie";
   Title: string;
   Year: string;
+  Director: string;
+  Actors: string[];
+  Writer: string;
 }
 
-export interface MoviesQuery {
-  movies: MoviesQuery_movies[];
+export interface MovieQuery {
+  movie: MovieQuery_movie | null;
 }
 
-export interface MoviesQueryVariables {
+export interface MovieQueryVariables {
   title: string;
 }
