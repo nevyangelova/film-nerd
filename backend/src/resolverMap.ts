@@ -15,6 +15,12 @@ const resolvers: IResolvers = {
         fakeMovie(_: void, args: void): Movie_Ext {
             return fakeMovie();
         },
+        movies: async (_source, { title }, { dataSources }) => {
+            let result = await dataSources.moviesAPI.searchMovies(title);
+
+            console.log(result);
+            return result.Search || [];
+        },
         movie: async (_source, { title }, { dataSources }) => {
             let result = await dataSources.moviesAPI.getMovieByTitle(title);
 
@@ -22,9 +28,9 @@ const resolvers: IResolvers = {
 
             return result;
         },
-        actor: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getDetails(birthName),
-        director: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getDetails(birthName),
-        writer: async (_source, { name }, { dataSources }) => dataSources.moviesAPI.getDetails(name),
+        actor: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getDetails(birthName, 'actor'),
+        director: async (_source, { name }, { dataSources }) => dataSources.moviesAPI.getDetails(name, 'director'),
+        writer: async (_source, { name }, { dataSources }) => dataSources.moviesAPI.getDetails(name, 'writer'),
     },
 };
 

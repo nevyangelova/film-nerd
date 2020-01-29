@@ -1,11 +1,11 @@
 type Query {
     helloWorld: String!
     fakeMovie: Movie!
-    movie(title: String!): Movie!
+    movies(title: String!): [Movie!]!
+    movie(title: String!): Movie
     actor(birthName: String!): Actor
-    director(birthName: String!): Director
+    director(name: String!): Director
     writer(name: String!): Writer
-
 }
 
 type Movie {
@@ -21,11 +21,9 @@ type Actor {
     birthPlace: String
 }
 
-
 type Director {
-    birthName: String
+    name: String
 }
-
 
 type Writer {
     name: String

@@ -18,7 +18,7 @@ export type Actor = {
 
 export type Director = {
    __typename?: 'Director',
-  birthName?: Maybe<Scalars['String']>,
+  name?: Maybe<Scalars['String']>,
 };
 
 export type Movie = {
@@ -34,10 +34,16 @@ export type Query = {
    __typename?: 'Query',
   helloWorld: Scalars['String'],
   fakeMovie: Movie,
-  movie: Movie,
+  movies: Array<Movie>,
+  movie?: Maybe<Movie>,
   actor?: Maybe<Actor>,
   director?: Maybe<Director>,
   writer?: Maybe<Writer>,
+};
+
+
+export type QueryMoviesArgs = {
+  title: Scalars['String']
 };
 
 
@@ -52,7 +58,7 @@ export type QueryActorArgs = {
 
 
 export type QueryDirectorArgs = {
-  birthName: Scalars['String']
+  name: Scalars['String']
 };
 
 
@@ -163,7 +169,7 @@ export type ActorResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type DirectorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Director'] = ResolversParentTypes['Director']> = {
-  birthName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type MovieResolvers<ContextType = any, ParentType extends ResolversParentTypes['Movie'] = ResolversParentTypes['Movie']> = {
@@ -177,9 +183,10 @@ export type MovieResolvers<ContextType = any, ParentType extends ResolversParent
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   helloWorld?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   fakeMovie?: Resolver<ResolversTypes['Movie'], ParentType, ContextType>,
-  movie?: Resolver<ResolversTypes['Movie'], ParentType, ContextType, RequireFields<QueryMovieArgs, 'title'>>,
+  movies?: Resolver<Array<ResolversTypes['Movie']>, ParentType, ContextType, RequireFields<QueryMoviesArgs, 'title'>>,
+  movie?: Resolver<Maybe<ResolversTypes['Movie']>, ParentType, ContextType, RequireFields<QueryMovieArgs, 'title'>>,
   actor?: Resolver<Maybe<ResolversTypes['Actor']>, ParentType, ContextType, RequireFields<QueryActorArgs, 'birthName'>>,
-  director?: Resolver<Maybe<ResolversTypes['Director']>, ParentType, ContextType, RequireFields<QueryDirectorArgs, 'birthName'>>,
+  director?: Resolver<Maybe<ResolversTypes['Director']>, ParentType, ContextType, RequireFields<QueryDirectorArgs, 'name'>>,
   writer?: Resolver<Maybe<ResolversTypes['Writer']>, ParentType, ContextType, RequireFields<QueryWriterArgs, 'name'>>,
 };
 

@@ -6,19 +6,16 @@
 // GraphQL query operation: MoviesQuery
 // ====================================================
 
-export interface MoviesQuery_movie {
-  __typename: "Movie";
-  Title: string;
-  Year: string;
-  Director: string;
-  Writer: string;
-  Actors: string[];
+export interface MoviesQuery_movies {
+    __typename: 'Movie';
+    Title: string;
+    Year: string;
 }
 
 export interface MoviesQuery {
-  movie: MoviesQuery_movie;
+    movies: MoviesQuery_movies[];
 }
 
 export interface MoviesQueryVariables {
-  title: string;
+    title: string;
 }

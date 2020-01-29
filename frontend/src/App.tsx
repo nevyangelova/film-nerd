@@ -9,7 +9,6 @@ import WriterDetailsPage from './writers/WriterDetailsPage';
 import './App.css';
 import { ROOT_PATH, ACTOR_DETAILS_PATH, DIRECTOR_DETAILS_PATH, WRITER_DETAILS_PATH } from './routes';
 
-
 const client = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
 });
@@ -22,7 +21,6 @@ const App: React.FC = () => {
                 <Route path={ACTOR_DETAILS_PATH} component={ActorDetailsPage} />
                 <Route path={DIRECTOR_DETAILS_PATH} component={DirectorDetailsPage} />
                 <Route path={WRITER_DETAILS_PATH} component={WriterDetailsPage} />
-
             </Router>
         </ApolloProvider>
     );
