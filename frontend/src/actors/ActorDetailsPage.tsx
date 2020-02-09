@@ -1,8 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'graphql.macro';
 import { ActorQuery, ActorQueryVariables } from './types/ActorQuery';
+import { MOVIE_DETAILS_PATH } from '../routes';
 
 interface actor {
     birthName: string;
@@ -16,7 +17,13 @@ const ACTOR_DETAILS = gql`
             birthPlace
             summary
             image
-            infoBox
+            tables {
+                year
+                film
+                role
+                director
+                notes
+            }
         }
     }
 `;
@@ -36,7 +43,10 @@ const ActorDetailsPage: React.FC = props => {
                 <div>{data.actor.birthName}</div>
                 <div>{data.actor.summary}</div>
                 {data.actor.image && <img src={data.actor.image} />}
-                <div>{data.actor.infoBox}</div>
+                {data.actor.tables &&
+                    data.actor.tables.map(table => (
+                        <Link to={MOVIE_DETAILS_PATH.replace(':title', table.film)}>{table.film}</Link>
+                    ))}
             </>
         );
     }

@@ -16,7 +16,7 @@ export type Actor = {
   birthPlace?: Maybe<Scalars['String']>,
   summary: Scalars['String'],
   image?: Maybe<Scalars['String']>,
-  infoBox?: Maybe<Scalars['String']>,
+  tables?: Maybe<Array<MovieSummary>>,
 };
 
 export type Director = {
@@ -31,6 +31,18 @@ export type Movie = {
   Director: Scalars['String'],
   Writer: Scalars['String'],
   Actors: Array<Scalars['String']>,
+  Plot: Scalars['String'],
+  Ratings: Array<Ratings>,
+  imdbRating?: Maybe<Scalars['String']>,
+};
+
+export type MovieSummary = {
+   __typename?: 'MovieSummary',
+  year: Scalars['String'],
+  film: Scalars['String'],
+  role?: Maybe<Scalars['String']>,
+  director: Scalars['String'],
+  notes?: Maybe<Scalars['String']>,
 };
 
 export type Query = {
@@ -66,6 +78,12 @@ export type QueryDirectorArgs = {
 
 export type QueryWriterArgs = {
   name: Scalars['String']
+};
+
+export type Ratings = {
+   __typename?: 'Ratings',
+  Source?: Maybe<Scalars['String']>,
+  Value?: Maybe<Scalars['String']>,
 };
 
 export enum Test {
@@ -153,7 +171,9 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
   String: ResolverTypeWrapper<Scalars['String']>,
   Movie: ResolverTypeWrapper<Movie>,
+  Ratings: ResolverTypeWrapper<Ratings>,
   Actor: ResolverTypeWrapper<Actor>,
+  MovieSummary: ResolverTypeWrapper<MovieSummary>,
   Director: ResolverTypeWrapper<Director>,
   Writer: ResolverTypeWrapper<Writer>,
   Test: Test,
@@ -165,7 +185,9 @@ export type ResolversParentTypes = {
   Query: {},
   String: Scalars['String'],
   Movie: Movie,
+  Ratings: Ratings,
   Actor: Actor,
+  MovieSummary: MovieSummary,
   Director: Director,
   Writer: Writer,
   Test: Test,
@@ -177,7 +199,7 @@ export type ActorResolvers<ContextType = any, ParentType extends ResolversParent
   birthPlace?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   summary?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
-  infoBox?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  tables?: Resolver<Maybe<Array<ResolversTypes['MovieSummary']>>, ParentType, ContextType>,
 };
 
 export type DirectorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Director'] = ResolversParentTypes['Director']> = {
@@ -190,6 +212,17 @@ export type MovieResolvers<ContextType = any, ParentType extends ResolversParent
   Director?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   Writer?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   Actors?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>,
+  Plot?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  Ratings?: Resolver<Array<ResolversTypes['Ratings']>, ParentType, ContextType>,
+  imdbRating?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
+export type MovieSummaryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MovieSummary'] = ResolversParentTypes['MovieSummary']> = {
+  year?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  film?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  role?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  director?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -201,6 +234,11 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   test?: Resolver<ResolversTypes['Test'], ParentType, ContextType>,
 };
 
+export type RatingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Ratings'] = ResolversParentTypes['Ratings']> = {
+  Source?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  Value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+};
+
 export type WriterResolvers<ContextType = any, ParentType extends ResolversParentTypes['Writer'] = ResolversParentTypes['Writer']> = {
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 };
@@ -209,7 +247,9 @@ export type Resolvers<ContextType = any> = {
   Actor?: ActorResolvers<ContextType>,
   Director?: DirectorResolvers<ContextType>,
   Movie?: MovieResolvers<ContextType>,
+  MovieSummary?: MovieSummaryResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
+  Ratings?: RatingsResolvers<ContextType>,
   Writer?: WriterResolvers<ContextType>,
 };
 

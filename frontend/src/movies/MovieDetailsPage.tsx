@@ -14,6 +14,12 @@ const MOVIE = gql`
             Director
             Actors
             Writer
+            Plot
+            Ratings {
+                Source
+                Value
+            }
+            imdbRating
         }
     }
 `;
@@ -39,6 +45,13 @@ const MovieDetailsPage = (props: RouteComponentProps<{ title: string }>) => {
                     {data.movie.Actors.map((actor: string) => (
                         <Link to={ACTOR_DETAILS_PATH.replace(':birthName', actor)}>{actor}</Link>
                     ))}
+                    <div>{data.movie.Plot}</div>
+                    {data.movie.Ratings.map((rating: any) => (
+                        <div>
+                            {rating.Source}: {rating.Value}
+                        </div>
+                    ))}
+                    <p>iMDB Rating: {data.movie.imdbRating}</p>
                 </>
             )}
         </div>

@@ -13,6 +13,22 @@ type Movie {
     Director: String!
     Writer: String!
     Actors: [String!]!
+    Plot: String!
+    Ratings: [Ratings!]!
+    imdbRating: String
+}
+
+type Ratings {
+    Source: String
+    Value: String
+}
+
+type MovieSummary {
+    year: String!
+    film: String!
+    role: String
+    director: String!
+    notes: String
 }
 
 type Actor {
@@ -20,7 +36,7 @@ type Actor {
     birthPlace: String
     summary: String!
     image: String
-    infoBox: String
+    tables: [MovieSummary!]
 }
 
 type Director {

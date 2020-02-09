@@ -21,24 +21,33 @@ export class MoviesAPI extends RESTDataSource {
     }
 
     getDetails = memoize(async (birthName: string, type: string) => {
-        let page: any = await wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' }).page(birthName);
+        let page: any = await wiki({
+            // @ts-ignore
+            headers: { 'User-Agent': 'my-script-name (https://my-script-link; my@email) wiki.js' },
+            apiUrl: 'https://en.wikipedia.org/w/api.php',
+        }).page(birthName);
         try {
             const categories = await page.categories();
 
             if (categories.includes('Category:All disambiguation pages')) {
-                page = await wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' }).page(`${birthName} (${type})`);
+                page = await wiki({
+                    // @ts-ignore
+                    headers: { 'User-Agent': 'my-script-name (https://my-script-link; my@email) wiki.js' },
+                    apiUrl: 'https://en.wikipedia.org/w/api.php',
+                }).page(`${birthName} (${type})`);
             }
         } catch (err) {
             console.log('cant get categories');
         }
         try {
             const info = await page.info();
+            console.log(await page.tables());
 
             return {
                 birthName: JSON.stringify(info.birthName),
                 summary: await page.summary(),
                 image: await extractImage(info.image),
-                infoBox: JSON.stringify(await page.fullInfo()),
+                tables: (await page.tables())[0],
             };
         } catch (error) {
             console.log('cant get info');
