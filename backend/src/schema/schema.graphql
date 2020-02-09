@@ -4,6 +4,7 @@ type Query {
     actor(birthName: String!): Actor
     director(name: String!): Director
     writer(name: String!): Writer
+    test: Test!
 }
 
 type Movie {
@@ -17,6 +18,9 @@ type Movie {
 type Actor {
     birthName: String
     birthPlace: String
+    summary: String!
+    image: String
+    infoBox: String
 }
 
 type Director {
@@ -25,4 +29,9 @@ type Director {
 
 type Writer {
     name: String
+}
+
+enum Test {
+    Value1
+    Value2
 }

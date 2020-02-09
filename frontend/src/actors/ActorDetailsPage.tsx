@@ -14,6 +14,9 @@ const ACTOR_DETAILS = gql`
         actor(birthName: $birthName) {
             birthName
             birthPlace
+            summary
+            image
+            infoBox
         }
     }
 `;
@@ -27,7 +30,17 @@ const ActorDetailsPage: React.FC = props => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
 
-    return <div>{data && data.actor ? data.actor.birthName : loading}</div>;
+    if (data && data.actor) {
+        return (
+            <>
+                <div>{data.actor.birthName}</div>
+                <div>{data.actor.summary}</div>
+                {data.actor.image && <img src={data.actor.image} />}
+                <div>{data.actor.infoBox}</div>
+            </>
+        );
+    }
+    return <div>'borg'</div>;
 };
 
 export default ActorDetailsPage;

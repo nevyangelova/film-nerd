@@ -1,11 +1,5 @@
 import { IResolvers } from 'graphql-tools';
-import faker from 'faker/locale/en';
-import { Movie_Ext } from './movies/types';
-
-const fakeMovie = (): Movie_Ext => ({
-    Title: faker.name.findName(),
-    Year: faker.date.past().toString(),
-});
+import { Test } from './types.generated';
 
 const resolvers: IResolvers = {
     Query: {
@@ -24,6 +18,7 @@ const resolvers: IResolvers = {
         actor: async (_source, { birthName }, { dataSources }) => dataSources.moviesAPI.getDetails(birthName, 'actor'),
         director: async (_source, { name }, { dataSources }) => dataSources.moviesAPI.getDetails(name, 'director'),
         writer: async (_source, { name }, { dataSources }) => dataSources.moviesAPI.getDetails(name, 'writer'),
+        test: async () => Test.Value1,
     },
 };
 
